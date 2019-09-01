@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as readJson from 'read-json-file';
 import myJSON from '../../../data.json';
 
 @Component({
@@ -9,8 +8,7 @@ import myJSON from '../../../data.json';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { 
-    let jsonPath = "./data.json"
+  constructor() {
     console.log(myJSON)
   }
 
