@@ -1,21 +1,27 @@
-import myJSON from '../../../data.json';
 import { Metering } from "../../models/Metering";
 import { Register } from 'src/app/models/Registers.js';
 import { Phase } from 'src/app/models/Phase.js';
 import { Meter } from 'src/app/models/Meter.js';
+import { RegisterService } from 'src/app/services/register.service';
 
 export class Convertion {
 
+  constructor(private registerService: RegisterService) {
+
+  }
+
   getMetering(): Metering 
   {
+    console.log("sdsdsd")
     let metering = new Metering()
-    let registers = new Register()
+    console.log("sdsdsd11111111111")
+    let registers = new Register(this.registerService)
+    console.log("sdsaaaaaaaaaaaaaaaadsd")
     metering.phaseA = this.parsePhaseA(metering.phaseA, registers)
     metering.phaseB = this.parsePhaseB(metering.phaseB, registers)
     metering.phaseC = this.parsePhaseC(metering.phaseC, registers)
     metering.phaseN = this.parsePhaseN(metering.phaseN, registers)
     metering.meter = this.parseMeter(metering.meter, registers)
-    console.log(registers)
     return metering;
   }
 

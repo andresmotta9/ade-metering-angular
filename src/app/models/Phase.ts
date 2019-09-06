@@ -1,41 +1,41 @@
 export class Phase {
-  public IGAIN: number
-  public VGAIN: number
-  public V2GAIN: number
-  public IRMSOS: number
-  public VRMSOS: number
-  public V2RMSOS: number
-  public PGAIN: number
-  public WATTOS: number
-  public VAROS: number
-  public FWATTOS: number
-  public FVAROS: number
-  public FIRMSOS: number
-  public FVRMSOS: number
-  public TEMP0: number
-  public TGAIN: number
-  public IRMS: number
-  public VRMS: number
-  public V2RMS: number
-  public TEMP: number
-  public WATTHR: number
-  public FWATTHR: number
-  public VARHR: number
-  public FVARHR: number
-  public VAHR: number
-  public WATT: number
-  public VAR: number
-  public VA: number
-  public VTHD: number
-  public ITHD: number
-  public FIRMS: number
-  public FVRMS: number
-  public PHCAL: number
-  public TEMPOS: number
-  public PF: number
-  public PERIOD: number
-  public IWV: number
-  public VWV: number
-  public V2WV: number
+  public IGAIN: number = 0
+  public VGAIN: number = 0
+  public V2GAIN: number = 0
+  public IRMSOS: number = 0
+  public VRMSOS: number = 0
+  public V2RMSOS: number = 0
+  public PGAIN: number = 0
+  public WATTOS: number = 0
+  public VAROS: number = 0
+  public FWATTOS: number = 0
+  public FVAROS: number = 0
+  public FIRMSOS: number = 0
+  public FVRMSOS: number = 0
+  public TEMP0: number = 0
+  public TGAIN: number = 0
+  public IRMS: number = 0
+  public VRMS: number = 0
+  public V2RMS: number = 0
+  public TEMP: number = 0
+  public WATTHR: number = 0
+  public FWATTHR: number = 0
+  public VARHR: number = 0
+  public FVARHR: number = 0
+  public VAHR: number = 0
+  public WATT: number = 0
+  public VAR: number = 0
+  public VA: number = 0
+  public VTHD: number = 0
+  public ITHD: number = 0
+  public FIRMS: number = 0
+  public FVRMS: number = 0
+  public PHCAL: number = 0
+  public TEMPOS: number = 0
+  public PF: number = 0
+  public PERIOD: number = 0
+  public IWV: number = 0
+  public VWV: number = 0
+  public V2WV: number = 0
 
 }
