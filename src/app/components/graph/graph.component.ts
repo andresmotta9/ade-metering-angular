@@ -13,30 +13,39 @@ import { RegisterService } from 'src/app/services/register.service.js';
 })
 export class GraphComponent implements OnInit, OnDestroy {
   public helper: Convertion
+  public obs: Observable<any>
+  private subscription: Subscription
 
   constructor(private registerService: RegisterService) {
     this.helper = new Convertion(this.registerService)
     this.metering = this.helper.getMetering()
-    this.registerService.getRegister()
-        .subscribe(data => {console.log(data)})
+    console.log(this.metering)
+    // this.registerService.getRegister()
+    //     .subscribe(data => {console.log(data)})
+    this.obs = new Observable(observable => {
+      setInterval(() => {
+        this.metering = this.helper.getMetering()
+        console.log(localStorage.getItem('parseo'))
+        if(localStorage.getItem('parseo') === '1') {
+          observable.next()
+        }
+      }, 10000);
+    })
+    this.subscription = this.obs.subscribe(() => {
+      console.log(this.metering.phaseA.VRMS)
+      this.lineChartData[0].data[0] = this.metering.phaseA.VRMS
+    })
   }
   public metering: Metering = new Metering()
   public lineChartData: ChartDataSets[] = [
-    { data: [4], label: 'Línea A vrms' },
-    { data: [4], label: 'Línea B vrms' },
-    { data: [4], label: 'Línea C vrms' },
-    { data: [4], label: 'Línea N vrms' }
+    { data: [this.metering.phaseA.VRMS], label: 'Línea A vrms' }
+    // { data: [this.metering.phaseA.VRMS], label: 'Línea B vrms' },
+    // { data: [this.metering.phaseA.VRMS], label: 'Línea C vrms' },
+    // { data: [this.metering.phaseA.VRMS], label: 'Línea N vrms' }
   ];
 
-  public obs = new Observable(observable => {
-    setInterval(() => {
-      // this.metering = this.helper.getMetering()
-      observable.next()
-    }, 1000);
-  })
-  private subscription: Subscription = this.obs.subscribe(() => {
-    // this.lineChartData[0].data[0] = this.metering.phaseA.VRMS
-  })
+
+
 
   public lineChartLabels: Label[] = ['0s'];
   public lineChartOptions: any = {
@@ -90,9 +99,6 @@ export class GraphComponent implements OnInit, OnDestroy {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
-
-
-
 
   ngOnInit() {
   }

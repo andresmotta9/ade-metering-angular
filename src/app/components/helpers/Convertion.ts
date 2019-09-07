@@ -12,21 +12,21 @@ export class Convertion {
 
   getMetering(): Metering 
   {
-    console.log("sdsdsd")
     let metering = new Metering()
-    console.log("sdsdsd11111111111")
     let registers = new Register(this.registerService)
-    console.log("sdsaaaaaaaaaaaaaaaadsd")
+    console.log('registro getMEteron ', registers)
     metering.phaseA = this.parsePhaseA(metering.phaseA, registers)
     metering.phaseB = this.parsePhaseB(metering.phaseB, registers)
     metering.phaseC = this.parsePhaseC(metering.phaseC, registers)
     metering.phaseN = this.parsePhaseN(metering.phaseN, registers)
     metering.meter = this.parseMeter(metering.meter, registers)
+    console.log(metering)
     return metering;
   }
 
   parsePhaseA(phaseA: Phase, register:Register): Phase
   {
+    console.log('registro A ', register)
     phaseA.IGAIN = register.AIGAIN
     phaseA.VGAIN = register.AVGAIN
     phaseA.V2GAIN = register.AV2GAIN
@@ -64,6 +64,7 @@ export class Convertion {
     phaseA.IWV = register.IAWV
     phaseA.VWV = register.VAWV
     phaseA.V2WV = register.VA2WV
+    console.log(phaseA)
     return phaseA
   }
 
