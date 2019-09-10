@@ -5,6 +5,7 @@ import { Label } from 'ng2-charts';
 import { Metering } from 'src/app/models/Metering.js';
 import { Observable, Subscription } from 'rxjs';
 import { RegisterService } from 'src/app/services/register.service.js';
+import { HttpClient } from '../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-graph',
@@ -16,38 +17,21 @@ export class GraphComponent implements OnInit, OnDestroy {
   public obs: Observable<any>
   private subscription: Subscription
 
-  constructor(private registerService: RegisterService) {
-    this.helper = new Convertion(this.registerService)
-    this.metering = this.helper.getMetering()
-    console.log(this.metering)
-    // this.registerService.getRegister()
-    //     .subscribe(data => {console.log(data)})
-    this.obs = new Observable(observable => {
-      setInterval(() => {
-        this.metering = this.helper.getMetering()
-        console.log(localStorage.getItem('parseo'))
-        if(localStorage.getItem('parseo') === '1') {
-          observable.next()
-        }
-      }, 10000);
-    })
-    this.subscription = this.obs.subscribe(() => {
-      console.log(this.metering.phaseA.VRMS)
-      this.lineChartData[0].data[0] = this.metering.phaseA.VRMS
-    })
+  constructor(private registerService: RegisterService,
+    private http: HttpClient) {
   }
   public metering: Metering = new Metering()
   public lineChartData: ChartDataSets[] = [
-    { data: [this.metering.phaseA.VRMS], label: 'Línea A vrms' }
-    // { data: [this.metering.phaseA.VRMS], label: 'Línea B vrms' },
-    // { data: [this.metering.phaseA.VRMS], label: 'Línea C vrms' },
-    // { data: [this.metering.phaseA.VRMS], label: 'Línea N vrms' }
+    { data: [0], label: 'Línea A vrms' },
+    { data: [0], label: 'Línea B vrms' },
+    { data: [0], label: 'Línea C vrms' },
+    { data: [0], label: 'Línea N vrms' }
   ];
 
 
 
 
-  public lineChartLabels: Label[] = ['0s'];
+  public lineChartLabels: Label[] = ['','','','','','','','','',''];
   public lineChartOptions: any = {
     responsive: true,
   };
@@ -79,19 +63,7 @@ export class GraphComponent implements OnInit, OnDestroy {
   // ];
   public lineChartLegend = true;
   public lineChartType = 'line';
-  // public randomize(): void {
-  //   let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-  //   for (let i = 0; i < this.lineChartData.length; i++) {
-  //     _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label }
-  //     for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-  //       _lineChartData[i].data[j] = this.generateNumber(i);
-  //     }
-  //   }
-  //   this.lineChartData = _lineChartData;
-  // }
-  // private generateNumber(i: number) {
-  //   return Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1);
-  // }
+
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
@@ -101,10 +73,87 @@ export class GraphComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    setInterval(() => {
+      this.getData(); 
+    }, 1000);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
+
+  getData() {
+    this.http.get('http://localhost:3000/registers')
+    .subscribe((data: any) => {
+      if(this.lineChartData[0].data.length == 10) {
+        this.lineChartData[0].data = [  
+          this.lineChartData[0].data[1],
+          this.lineChartData[0].data[2],
+          this.lineChartData[0].data[3],
+          this.lineChartData[0].data[4],
+          this.lineChartData[0].data[5],
+          this.lineChartData[0].data[6],
+          this.lineChartData[0].data[7],
+          this.lineChartData[0].data[8],
+          this.lineChartData[0].data[9],
+          this.lineChartData[0].data[10],
+        ]
+        this.lineChartData[0].data[9] = parseInt(data.AVRMS)
+      } else {
+        this.lineChartData[0].data.push(parseInt(data.AVRMS))
+      }
+      if(this.lineChartData[1].data.length == 10) {
+        this.lineChartData[1].data = [
+          this.lineChartData[1].data[1],
+          this.lineChartData[1].data[2],
+          this.lineChartData[1].data[3],
+          this.lineChartData[1].data[4],
+          this.lineChartData[1].data[5],
+          this.lineChartData[1].data[6],
+          this.lineChartData[1].data[7],
+          this.lineChartData[1].data[8],
+          this.lineChartData[1].data[9],
+          this.lineChartData[1].data[10],
+        ]
+        this.lineChartData[1].data[9] = parseInt(data.BVRMS)
+      } else {
+        this.lineChartData[1].data.push(parseInt(data.BVRMS))
+      }
+      if(this.lineChartData[2].data.length == 10) {
+        this.lineChartData[2].data = [
+          this.lineChartData[2].data[1],
+          this.lineChartData[2].data[2],
+          this.lineChartData[2].data[3],
+          this.lineChartData[2].data[4],
+          this.lineChartData[2].data[5],
+          this.lineChartData[2].data[6],
+          this.lineChartData[2].data[7],
+          this.lineChartData[2].data[8],
+          this.lineChartData[2].data[9],
+          this.lineChartData[2].data[10],
+        ]
+        this.lineChartData[2].data[9] = parseInt(data.CVRMS)
+      } else {
+        this.lineChartData[2].data.push(parseInt(data.CVRMS))
+      }
+      if(this.lineChartData[3].data.length == 10) {
+        this.lineChartData[3].data = [
+          this.lineChartData[3].data[1],
+          this.lineChartData[3].data[2],
+          this.lineChartData[3].data[3],
+          this.lineChartData[3].data[4],
+          this.lineChartData[3].data[5],
+          this.lineChartData[3].data[6],
+          this.lineChartData[3].data[7],
+          this.lineChartData[3].data[8],
+          this.lineChartData[3].data[9],
+          this.lineChartData[3].data[10],
+        ]
+        this.lineChartData[3].data[9] = parseInt(data.NVRMS)
+      } else {
+        this.lineChartData[3].data.push(parseInt(data.NVRMS))
+      }
+    })
   }
 
 }
