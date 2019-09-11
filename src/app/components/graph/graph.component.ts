@@ -91,7 +91,6 @@ export class GraphComponent implements OnInit, OnDestroy {
   getData() {
     this.http.get('https://json-ade-metering.herokuapp.com/db')
     .subscribe((data: any) => {
-      console.log(data.registers)
       this.setChartData(0, parseInt(data.registers.VAWV));
       this.setChartData(1, parseInt(data.registers.VBWV));
       this.setChartData(2, parseInt(data.registers.VCWV));
