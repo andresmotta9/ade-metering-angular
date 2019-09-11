@@ -85,7 +85,6 @@ export class GraphComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.subscription.unsubscribe();
   }
 
   getData() {
