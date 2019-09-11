@@ -27,6 +27,12 @@ export class GraphComponent implements OnInit, OnDestroy {
     { data: [0], label: 'Línea C vrms' },
     { data: [0], label: 'Línea N vrms' }
   ];
+  public lineChartCurrentData: ChartDataSets[] = [
+    { data: [0], label: 'Línea A irms' },
+    { data: [0], label: 'Línea B irms' },
+    { data: [0], label: 'Línea C irms' },
+    { data: [0], label: 'Línea N irms' }
+  ];
 
 
 
@@ -75,7 +81,7 @@ export class GraphComponent implements OnInit, OnDestroy {
   ngOnInit() {
     setInterval(() => {
       this.getData(); 
-    }, 1000);
+    }, 2000);
   }
 
   ngOnDestroy() {
@@ -85,75 +91,58 @@ export class GraphComponent implements OnInit, OnDestroy {
   getData() {
     this.http.get('http://localhost:3000/registers')
     .subscribe((data: any) => {
-      if(this.lineChartData[0].data.length == 10) {
-        this.lineChartData[0].data = [  
-          this.lineChartData[0].data[1],
-          this.lineChartData[0].data[2],
-          this.lineChartData[0].data[3],
-          this.lineChartData[0].data[4],
-          this.lineChartData[0].data[5],
-          this.lineChartData[0].data[6],
-          this.lineChartData[0].data[7],
-          this.lineChartData[0].data[8],
-          this.lineChartData[0].data[9],
-          this.lineChartData[0].data[10],
-        ]
-        this.lineChartData[0].data[9] = parseInt(data.AVRMS)
-      } else {
-        this.lineChartData[0].data.push(parseInt(data.AVRMS))
-      }
-      if(this.lineChartData[1].data.length == 10) {
-        this.lineChartData[1].data = [
-          this.lineChartData[1].data[1],
-          this.lineChartData[1].data[2],
-          this.lineChartData[1].data[3],
-          this.lineChartData[1].data[4],
-          this.lineChartData[1].data[5],
-          this.lineChartData[1].data[6],
-          this.lineChartData[1].data[7],
-          this.lineChartData[1].data[8],
-          this.lineChartData[1].data[9],
-          this.lineChartData[1].data[10],
-        ]
-        this.lineChartData[1].data[9] = parseInt(data.BVRMS)
-      } else {
-        this.lineChartData[1].data.push(parseInt(data.BVRMS))
-      }
-      if(this.lineChartData[2].data.length == 10) {
-        this.lineChartData[2].data = [
-          this.lineChartData[2].data[1],
-          this.lineChartData[2].data[2],
-          this.lineChartData[2].data[3],
-          this.lineChartData[2].data[4],
-          this.lineChartData[2].data[5],
-          this.lineChartData[2].data[6],
-          this.lineChartData[2].data[7],
-          this.lineChartData[2].data[8],
-          this.lineChartData[2].data[9],
-          this.lineChartData[2].data[10],
-        ]
-        this.lineChartData[2].data[9] = parseInt(data.CVRMS)
-      } else {
-        this.lineChartData[2].data.push(parseInt(data.CVRMS))
-      }
-      if(this.lineChartData[3].data.length == 10) {
-        this.lineChartData[3].data = [
-          this.lineChartData[3].data[1],
-          this.lineChartData[3].data[2],
-          this.lineChartData[3].data[3],
-          this.lineChartData[3].data[4],
-          this.lineChartData[3].data[5],
-          this.lineChartData[3].data[6],
-          this.lineChartData[3].data[7],
-          this.lineChartData[3].data[8],
-          this.lineChartData[3].data[9],
-          this.lineChartData[3].data[10],
-        ]
-        this.lineChartData[3].data[9] = parseInt(data.NVRMS)
-      } else {
-        this.lineChartData[3].data.push(parseInt(data.NVRMS))
-      }
+      this.setChartData(0, parseInt(data.VAWV));
+      this.setChartData(1, parseInt(data.VBWV));
+      this.setChartData(2, parseInt(data.VCWV));
+      this.setChartData(3, parseInt(data.VNWV));
+      this.setChartCurrentData(0, parseInt(data.IAWV));
+      this.setChartCurrentData(1, parseInt(data.IBWV));
+      this.setChartCurrentData(2, parseInt(data.ICWV));
+      this.setChartCurrentData(3, parseInt(data.INWV));
     })
+  }
+
+  setChartData(position, value)
+  {
+    if (this.lineChartData[position].data.length == 10) {
+      // @ts-ignore
+        this.lineChartData[position].data = [
+        this.lineChartData[position].data[1],
+        this.lineChartData[position].data[2],
+        this.lineChartData[position].data[3],
+        this.lineChartData[position].data[4],
+        this.lineChartData[position].data[5],
+        this.lineChartData[position].data[6],
+        this.lineChartData[position].data[7],
+        this.lineChartData[position].data[8],
+        this.lineChartData[position].data[9],
+        this.lineChartData[position].data[10],
+      ]
+      this.lineChartData[position].data[9] = value
+    } else {
+      this.lineChartData[position].data.push(value)
+    }
+  }
+  setChartCurrentData(position, value)
+  {
+    if (this.lineChartCurrentData[position].data.length == 10) {
+      // @ts-ignore
+      this.lineChartCurrentData[position].data = [
+        this.lineChartCurrentData[position].data[1],
+        this.lineChartCurrentData[position].data[2],
+        this.lineChartCurrentData[position].data[3],
+        this.lineChartCurrentData[position].data[4],
+        this.lineChartCurrentData[position].data[5],
+        this.lineChartCurrentData[position].data[6],
+        this.lineChartCurrentData[position].data[7],
+        this.lineChartCurrentData[position].data[8],
+        this.lineChartCurrentData[position].data[9],
+        this.lineChartCurrentData[position].data[10],
+      ]
+      this.lineChartCurrentData[position].data[9] = value
+    } else {
+      this.lineChartCurrentData[position].data.push(value)
+    }
   }
 
 }
