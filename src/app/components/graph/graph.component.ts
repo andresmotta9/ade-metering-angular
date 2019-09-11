@@ -81,7 +81,7 @@ export class GraphComponent implements OnInit, OnDestroy {
   ngOnInit() {
     setInterval(() => {
       this.getData(); 
-    }, 2000);
+    }, 1000);
   }
 
   ngOnDestroy() {
@@ -89,16 +89,17 @@ export class GraphComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.http.get('http://localhost:3000/registers')
+    this.http.get('https://json-ade-metering.herokuapp.com/db')
     .subscribe((data: any) => {
-      this.setChartData(0, parseInt(data.VAWV));
-      this.setChartData(1, parseInt(data.VBWV));
-      this.setChartData(2, parseInt(data.VCWV));
-      this.setChartData(3, parseInt(data.VNWV));
-      this.setChartCurrentData(0, parseInt(data.IAWV));
-      this.setChartCurrentData(1, parseInt(data.IBWV));
-      this.setChartCurrentData(2, parseInt(data.ICWV));
-      this.setChartCurrentData(3, parseInt(data.INWV));
+      console.log(data.registers)
+      this.setChartData(0, parseInt(data.registers.VAWV));
+      this.setChartData(1, parseInt(data.registers.VBWV));
+      this.setChartData(2, parseInt(data.registers.VCWV));
+      this.setChartData(3, parseInt(data.registers.VNWV));
+      this.setChartCurrentData(0, parseInt(data.registers.IAWV));
+      this.setChartCurrentData(1, parseInt(data.registers.IBWV));
+      this.setChartCurrentData(2, parseInt(data.registers.ICWV));
+      this.setChartCurrentData(3, parseInt(data.registers.INWV));
     })
   }
 
