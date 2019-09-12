@@ -1,16 +1,30 @@
-<div class="container mt-5">
+<div>
     <div class="row top">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div style="display: block;">
-              <h2>Voltaje (rms)</h2>
-                <canvas baseChart width="100" height="100" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                <h4 style="margin-left: 18%">Voltaje (rms)</h4>
+                <canvas baseChart width="100" height="70" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)"></canvas>
             </div>
         </div>
-        <div class="col-md-4 current">
+        <div class="col-md-3">
             <div style="display: block;">
-              <h2>Corriente (rms)</h2>
-                <canvas baseChart width="100" height="100" [datasets]="lineChartCurrentData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                <h4 style="margin-left: 18%">Corriente (rms)</h4>
+                <canvas baseChart width="100" height="70" [datasets]="lineChartCurrentData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="display: block;">
+                <h4>Distorción en corriente(THDI)</h4>
+                <canvas baseChart width="100" height="70" [datasets]="lineChartThdiData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="display: block;">
+                <h4>Distorción en voltaje(THDV)</h4>
+                <canvas baseChart width="100" height="70" [datasets]="lineChartThdvData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)"></canvas>
             </div>
         </div>
@@ -25,5 +39,28 @@
       </table>
       <button mat-button mat-raised-button color="primary" (click)="randomize()">Randomize</button>
     </div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div style="display: block;">
+                <h4 style="margin-left: 18%">Potencia activa (W)</h4>
+                <canvas baseChart width="100" height="50" [datasets]="lineChartWattData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="display: block;">
+                <h4 style="margin-left: 10%">Potencia reactiva (var)</h4>
+                <canvas baseChart width="100" height="50" [datasets]="lineChartVarData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="display: block;">
+                <h4 style="margin-left: 10%">Potencia aparente (va)</h4>
+                <canvas baseChart width="100" height="50" [datasets]="lineChartVaData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
     </div>
 </div>
