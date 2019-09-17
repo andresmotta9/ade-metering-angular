@@ -1,6 +1,6 @@
 .home {
   height: 95vh;
-  background-image: linear-gradient() , url('../../../assets/vector.jpg');
+  background-image: url('../../../assets/vector.jpg');
   background-size: cover;
   background-position: center;
 /* background-image: url('../../../assets/vector.jpg');
@@ -21,5 +21,15 @@ margin-top: 150px; /* Added */
 
 .text-style {    
 position: fixed;
-opacity: 1;
+font-weight: 200;
+}
+
+.card-style {
+  margin-top: 20%;
+  background-color: #fff0;
+  border: rgba(0,0,0,.0);
+}
+
+.position {
+  margin-left: 25%;
 }
