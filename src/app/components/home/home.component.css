@@ -3,33 +3,28 @@
   background-image: url('../../../assets/vector.jpg');
   background-size: cover;
   background-position: center;
-/* background-image: url('../../../assets/vector.jpg');
-  opacity: 0.2;
-  background-color: #cccccc;
-  height: 500px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
+  overflow: hidden;
 }
 
-.introduccion {
-opacity: 1;
-margin-bottom: 10px; /* Added */
-margin-left: 400px; /* Added */
-margin-top: 150px; /* Added */
+.heading-primary {
+  color: black;
 }
 
-.text-style {    
-position: fixed;
-font-weight: 200;
+.heading-primary-main{
+  display: block;
+  font-size: 40px;
+  font-weight: 400;
 }
 
-.card-style {
-  margin-top: 20%;
-  background-color: #fff0;
-  border: rgba(0,0,0,.0);
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
 }
 
-.position {
-  margin-left: 25%;
+.text-box{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
