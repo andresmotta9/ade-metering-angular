@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Convertion } from '../helpers/Convertion.js';
-import { RegisterService } from 'src/app/services/register.service.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,18 +8,7 @@ import { RegisterService } from 'src/app/services/register.service.js';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private f:RegisterService) { 
-    this.load()
-    
-    // let helper = new Convertion();
-    // console.log(helper.getMetering())
-  }
-  load() {
-    this.f.getRegister().
-      subscribe(data => {
-        console.log(data);
-
-      })
+  constructor(private router: Router) { 
   }
 
   ngOnInit() {
