@@ -109,6 +109,12 @@ export class GraphComponent implements OnInit, OnDestroy {
     setInterval(() => {
       this.getData(); 
     }, 1000);
+    // setInterval(() => {
+    //   this.getData(); 
+    // }, 50);
+    // setInterval(() => {
+    //   this.getData(); 
+    // }, 50);
   }
 
   ngOnDestroy() {
@@ -118,13 +124,13 @@ export class GraphComponent implements OnInit, OnDestroy {
     this.http.get('https://json-ade-metering.herokuapp.com/db')
     .subscribe((data: any) => {
       this.setChartData(0, parseInt(data.registers.VAWV));
-      this.setChartData(1, parseInt(data.registers.VBWV));
-      this.setChartData(2, parseInt(data.registers.VCWV));
-      this.setChartData(3, parseInt(data.registers.VNWV));
-      this.setChartData(0, (parseInt(data.registers.VAWV)+2000));
-      this.setChartData(1, (parseInt(data.registers.VBWV)+4000));
-      this.setChartData(2, (parseInt(data.registers.VCWV)+6000));
-      this.setChartData(3, (parseInt(data.registers.VNWV)+5000));
+      // this.setChartData(1, parseInt(data.registers.VBWV));
+      // this.setChartData(2, parseInt(data.registers.VCWV));
+      // this.setChartData(3, parseInt(data.registers.VNWV));
+      this.setChartData(0, (parseInt(data.registers.VAWV)+20000));
+      // this.setChartData(1, (parseInt(data.registers.VBWV)+4000));
+      // this.setChartData(2, (parseInt(data.registers.VCWV)+6000));
+      // this.setChartData(3, (parseInt(data.registers.VNWV)+5000));
       this.setChartCurrentData(0, parseInt(data.registers.IAWV));
       this.setChartCurrentData(1, parseInt(data.registers.IBWV));
       this.setChartCurrentData(2, parseInt(data.registers.ICWV));
@@ -166,147 +172,106 @@ export class GraphComponent implements OnInit, OnDestroy {
 
   setChartData(position, value)
   {
-    if (this.lineChartData[position].data.length == 10) {
+    console.log('data length ', this.lineChartData[position].data.length);
+    console.log('dataLabel length ', this.lineChartLabels.length);
+    console.log('data ', this.lineChartData[position].data);
+    if (this.lineChartData[position].data.length == this.lineChartLabels.length - 1) {
+      console.log('new data ', this.lineChartData[position].data);
+      this.lineChartData[position].data[this.lineChartLabels.length - 1] = value
+      console.log('new data NEW', this.lineChartData[position].data);
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartData[position].data[i]);
+      }
+      console.log('temporal data ', dataArray);
       // @ts-ignore
-        this.lineChartData[position].data = [
-        this.lineChartData[position].data[1],
-        this.lineChartData[position].data[2],
-        this.lineChartData[position].data[3],
-        this.lineChartData[position].data[4],
-        this.lineChartData[position].data[5],
-        this.lineChartData[position].data[6],
-        this.lineChartData[position].data[7],
-        this.lineChartData[position].data[8],
-        this.lineChartData[position].data[9],
-        this.lineChartData[position].data[10],
-      ]
-      this.lineChartData[position].data[9] = value
+      console.log('old data ', this.lineChartData[position].data);
+      this.lineChartData[position].data = dataArray;
+      console.log('NEW data ', this.lineChartData[position].data);
     } else {
       this.lineChartData[position].data.push(value)
     }
   }
   setChartCurrentData(position, value)
   {
-    if (this.lineChartCurrentData[position].data.length == 10) {
+    if (this.lineChartCurrentData[position].data.length == this.lineChartLabels.length - 1) {
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartCurrentData[position].data[i]);
+      }
       // @ts-ignore
-      this.lineChartCurrentData[position].data = [
-        this.lineChartCurrentData[position].data[1],
-        this.lineChartCurrentData[position].data[2],
-        this.lineChartCurrentData[position].data[3],
-        this.lineChartCurrentData[position].data[4],
-        this.lineChartCurrentData[position].data[5],
-        this.lineChartCurrentData[position].data[6],
-        this.lineChartCurrentData[position].data[7],
-        this.lineChartCurrentData[position].data[8],
-        this.lineChartCurrentData[position].data[9],
-        this.lineChartCurrentData[position].data[10],
-      ]
-      this.lineChartCurrentData[position].data[9] = value
+      this.lineChartCurrentData[position].data = dataArray;
+      this.lineChartCurrentData[position].data[this.lineChartLabels.length - 2] = value
     } else {
       this.lineChartCurrentData[position].data.push(value)
     }
   }  
   setLineChartWattData(position, value)
   {
-    if (this.lineChartWattData[position].data.length == 10) {
+    if (this.lineChartWattData[position].data.length == this.lineChartLabels.length - 1) {
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartWattData[position].data[i]);
+      }
       // @ts-ignore
-      this.lineChartWattData[position].data = [
-        this.lineChartWattData[position].data[1],
-        this.lineChartWattData[position].data[2],
-        this.lineChartWattData[position].data[3],
-        this.lineChartWattData[position].data[4],
-        this.lineChartWattData[position].data[5],
-        this.lineChartWattData[position].data[6],
-        this.lineChartWattData[position].data[7],
-        this.lineChartWattData[position].data[8],
-        this.lineChartWattData[position].data[9],
-        this.lineChartWattData[position].data[10],
-      ]
-      this.lineChartWattData[position].data[9] = value
+      this.lineChartWattData[position].data = dataArray;
+      this.lineChartWattData[position].data[this.lineChartLabels.length - 2] = value
     } else {
       this.lineChartWattData[position].data.push(value)
     }
   }
   setLineChartVarData(position, value)
   {
-    if (this.lineChartVarData[position].data.length == 10) {
+    if (this.lineChartVarData[position].data.length == this.lineChartLabels.length - 1) {
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartVarData[position].data[i]);
+      }
       // @ts-ignore
-      this.lineChartVarData[position].data = [
-        this.lineChartVarData[position].data[1],
-        this.lineChartVarData[position].data[2],
-        this.lineChartVarData[position].data[3],
-        this.lineChartVarData[position].data[4],
-        this.lineChartVarData[position].data[5],
-        this.lineChartVarData[position].data[6],
-        this.lineChartVarData[position].data[7],
-        this.lineChartVarData[position].data[8],
-        this.lineChartVarData[position].data[9],
-        this.lineChartVarData[position].data[10],
-      ]
-      this.lineChartVarData[position].data[9] = value
+      this.lineChartVarData[position].data = dataArray;
+      this.lineChartVarData[position].data[this.lineChartLabels.length - 2] = value
     } else {
       this.lineChartVarData[position].data.push(value)
     }
   }
   setLineChartVaData(position, value)
   {
-    if (this.lineChartVaData[position].data.length == 10) {
+    if (this.lineChartVaData[position].data.length == this.lineChartLabels.length - 1) {
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartVaData[position].data[i]);
+      }
       // @ts-ignore
-      this.lineChartVaData[position].data = [
-        this.lineChartVaData[position].data[1],
-        this.lineChartVaData[position].data[2],
-        this.lineChartVaData[position].data[3],
-        this.lineChartVaData[position].data[4],
-        this.lineChartVaData[position].data[5],
-        this.lineChartVaData[position].data[6],
-        this.lineChartVaData[position].data[7],
-        this.lineChartVaData[position].data[8],
-        this.lineChartVaData[position].data[9],
-        this.lineChartVaData[position].data[10],
-      ]
-      this.lineChartVaData[position].data[9] = value
+      this.lineChartVaData[position].data = dataArray;
+      this.lineChartVaData[position].data[this.lineChartLabels.length - 2] = value
     } else {
       this.lineChartVaData[position].data.push(value)
     }
   }
   setLineChartThdiData(position, value)
   {
-    if (this.lineChartThdiData[position].data.length == 10) {
+    if (this.lineChartThdiData[position].data.length == this.lineChartLabels.length - 1) {
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartThdiData[position].data[i]);
+      }
       // @ts-ignore
-      this.lineChartThdiData[position].data = [
-        this.lineChartThdiData[position].data[1],
-        this.lineChartThdiData[position].data[2],
-        this.lineChartThdiData[position].data[3],
-        this.lineChartThdiData[position].data[4],
-        this.lineChartThdiData[position].data[5],
-        this.lineChartThdiData[position].data[6],
-        this.lineChartThdiData[position].data[7],
-        this.lineChartThdiData[position].data[8],
-        this.lineChartThdiData[position].data[9],
-        this.lineChartThdiData[position].data[10],
-      ]
-      this.lineChartThdiData[position].data[9] = value
+      this.lineChartThdiData[position].data = dataArray;
+      this.lineChartThdiData[position].data[this.lineChartLabels.length - 2] = value
     } else {
       this.lineChartThdiData[position].data.push(value)
     }
   }
   setLineChartThdvData(position, value)
   {
-    if (this.lineChartThdvData[position].data.length == 10) {
+    if (this.lineChartThdvData[position].data.length == this.lineChartLabels.length - 1) {
+      let dataArray = [];
+      for(let i = 1; i < this.lineChartLabels.length; i++) {
+        dataArray.push(this.lineChartThdvData[position].data[i]);
+      }
       // @ts-ignore
-      this.lineChartThdvData[position].data = [
-        this.lineChartThdvData[position].data[1],
-        this.lineChartThdvData[position].data[2],
-        this.lineChartThdvData[position].data[3],
-        this.lineChartThdvData[position].data[4],
-        this.lineChartThdvData[position].data[5],
-        this.lineChartThdvData[position].data[6],
-        this.lineChartThdvData[position].data[7],
-        this.lineChartThdvData[position].data[8],
-        this.lineChartThdvData[position].data[9],
-        this.lineChartThdvData[position].data[10],
-      ]
-      this.lineChartThdvData[position].data[9] = value
+      this.lineChartThdvData[position].data = dataArray;
+      this.lineChartThdvData[position].data[this.lineChartLabels.length - 2] = value
     } else {
       this.lineChartThdvData[position].data.push(value)
     }

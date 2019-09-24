@@ -1,32 +1,16 @@
 <div>
     <div class="row top">
         <div class="col-md-3">
-            <div style="display: block;">
-                <h4 style="margin-left: 18%">Voltaje (V)</h4>
-                <canvas baseChart width="100" height="70" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartData" ></app-graphic>
         </div>
         <div class="col-md-3">
-            <div style="display: block;">
-                <h4 style="margin-left: 18%">Corriente (A)</h4>
-                <canvas baseChart width="100" height="70" [datasets]="lineChartCurrentData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartCurrentData" ></app-graphic>
         </div>
         <div class="col-md-3">
-            <div style="display: block;">
-                <h4>Distorsión en corriente(THDI)</h4>
-                <canvas baseChart width="100" height="70" [datasets]="lineChartThdiData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartThdiData" ></app-graphic>
         </div>
         <div class="col-md-3">
-            <div style="display: block;">
-                <h4>Distorsión en voltaje(THDV)</h4>
-                <canvas baseChart width="100" height="70" [datasets]="lineChartThdvData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartThdvData" ></app-graphic>
         </div>
         <!-- <div class="col-md-6" style="margin-bottom: 10px">
       <table class="table table-responsive table-condensed">
@@ -42,25 +26,13 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div style="display: block;">
-                <h4 style="margin-left: 18%">Potencia activa (W)</h4>
-                <canvas baseChart width="100" height="50" [datasets]="lineChartWattData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartWattData" ></app-graphic>
         </div>
         <div class="col-md-4">
-            <div style="display: block;">
-                <h4 style="margin-left: 10%">Potencia reactiva (var)</h4>
-                <canvas baseChart width="100" height="50" [datasets]="lineChartVarData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartVarData" ></app-graphic>
         </div>
         <div class="col-md-4">
-            <div style="display: block;">
-                <h4 style="margin-left: 10%">Potencia aparente (va)</h4>
-                <canvas baseChart width="100" height="50" [datasets]="lineChartVaData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-            </div>
+            <app-graphic [lineChartData]="lineChartVaData" ></app-graphic>
         </div>
     </div>
 </div>

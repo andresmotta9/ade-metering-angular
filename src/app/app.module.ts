@@ -8,13 +8,15 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { GraphComponent } from './components/graph/graph.component';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
+import { GraphicComponent } from './components/graphic/graphic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    GraphComponent
+    GraphComponent,
+    GraphicComponent
   ],
   imports: [
     BrowserModule,
