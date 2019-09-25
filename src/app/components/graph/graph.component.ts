@@ -6,6 +6,8 @@ import { Metering } from 'src/app/models/Metering.js';
 import { Observable, Subscription } from 'rxjs';
 import { RegisterService } from 'src/app/services/register.service.js';
 import { HttpClient } from '../../../../node_modules/@angular/common/http';
+import { ChartOptions } from 'chart.js';
+import { Color, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-graph',

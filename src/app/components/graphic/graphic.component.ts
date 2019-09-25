@@ -13,6 +13,7 @@ export class GraphicComponent implements OnInit {
   @Input() lineChartData: ChartDataSets[]  = [
     { data: [0], label: 'Línea A' }
   ];
+  @Input() name: string = "";
 
   constructor(private http: HttpClient) { }
 
