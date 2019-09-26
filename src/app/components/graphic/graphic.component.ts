@@ -20,12 +20,19 @@ export class GraphicComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  public lineChartLabels: Label[] = ['','','','','','','','','',''];
+  public lineChartLabels: Label[] = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
   public lineChartOptions: any = {
     responsive: true,
   };
   public lineChartLegend = true;
   public lineChartType = 'line';
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
 
   ngOnInit() {
   }

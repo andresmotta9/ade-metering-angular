@@ -16,6 +16,9 @@ import { Color, BaseChartDirective } from 'ng2-charts';
 })
 export class GraphComponent implements OnInit, OnDestroy {
   public helper: Convertion
+  public interval;
+  public interval2;
+  public interval3;
   public obs: Observable<any>
   private subscription: Subscription
 
@@ -66,7 +69,7 @@ export class GraphComponent implements OnInit, OnDestroy {
     { data: [0], label: 'Línea N irms' }
   ];
 
-  public lineChartLabels: Label[] = ['','','','','','','','','',''];
+  public lineChartLabels: Label[] = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
   public lineChartOptions: any = {
     responsive: true,
   };
@@ -108,80 +111,93 @@ export class GraphComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.getData(); 
     }, 50);
-    setInterval(() => {
+    this.interval2 = setInterval(() => {
       this.getData(); 
     }, 50);
-    setInterval(() => {
+    this.interval3 = setInterval(() => {
       this.getData(); 
     }, 50);
   }
 
   ngOnDestroy() {
+    if(this.interval) {
+      clearInterval(this.interval)
+    }
+    if(this.interval2) {
+      clearInterval(this.interval2)
+    }
+    if(this.interval3) {
+      clearInterval(this.interval3)
+    }
   }
 
   getData() {
     this.http.get('https://json-ade-metering.herokuapp.com/registers/1')
     .subscribe((data: any) => {
-      this.setChartData(0, parseInt(data.VAWV));
-      this.setChartData(1, parseInt(data.VBWV));
-      this.setChartData(2, parseInt(data.VCWV));
-      this.setChartData(3, parseInt(data.VNWV));
-      this.setChartCurrentData(0, parseInt(data.IAWV));
-      this.setChartCurrentData(1, parseInt(data.IBWV));
-      this.setChartCurrentData(2, parseInt(data.ICWV));
-      this.setChartCurrentData(3, parseInt(data.INWV));
-      this.setLineChartWattData(0, parseInt(data.AWATT));
-      this.setLineChartWattData(1, parseInt(data.BWATT));
-      this.setLineChartWattData(2, parseInt(data.CWATT));
-      this.setLineChartWattData(3, parseInt(data.NWATT));
-      this.setLineChartVarData(0, parseInt(data.AVAR));
-      this.setLineChartVarData(1, parseInt(data.BVAR));
-      this.setLineChartVarData(2, parseInt(data.CVAR));
-      this.setLineChartVarData(3, parseInt(data.NVAR));
-      this.setLineChartVaData(0, parseInt(data.AVA));
-      this.setLineChartVaData(1, parseInt(data.BVA));
-      this.setLineChartVaData(2, parseInt(data.CVA));
-      this.setLineChartVaData(3, parseInt(data.NVA));
-      this.setLineChartThdiData(0, parseInt(data.AVTHD));
-      this.setLineChartThdiData(1, parseInt(data.BVTHD));
-      this.setLineChartThdiData(2, parseInt(data.CVTHD));
-      this.setLineChartThdiData(3, parseInt(data.NVTHD));
-      this.setLineChartThdiData(0, parseInt(data.AITHD));
-      this.setLineChartThdiData(1, parseInt(data.BITHD));
-      this.setLineChartThdiData(2, parseInt(data.CITHD));
-      this.setLineChartThdiData(3, parseInt(data.NITHD));
-      this.setLineChartThdvData(0, parseInt(data.AITHD));
-      this.setLineChartThdvData(1, parseInt(data.BITHD));
-      this.setLineChartThdvData(2, parseInt(data.CITHD));
-      this.setLineChartThdvData(3, parseInt(data.NITHD));
-      this.setLineChartThdvData(0, parseInt(data.AVTHD));
-      this.setLineChartThdvData(1, parseInt(data.BVTHD));
-      this.setLineChartThdvData(2, parseInt(data.CVTHD));
-      this.setLineChartThdvData(3, parseInt(data.NVTHD));
+      for (const item in data) {
+        if(item !== "id"){
+          this.setChartData(0, parseInt(data[item].VAWV));
+          this.setChartData(1, parseInt(data[item].VBWV));
+          this.setChartData(2, parseInt(data[item].VCWV));
+          this.setChartData(3, parseInt(data[item].VNWV));
+          this.setChartCurrentData(0, parseInt(data[item].IAWV));
+          this.setChartCurrentData(1, parseInt(data[item].IBWV));
+          this.setChartCurrentData(2, parseInt(data[item].ICWV));
+          this.setChartCurrentData(3, parseInt(data[item].INWV));
+          this.setLineChartWattData(0, parseInt(data[item].AWATT));
+          this.setLineChartWattData(1, parseInt(data[item].BWATT));
+          this.setLineChartWattData(2, parseInt(data[item].CWATT));
+          this.setLineChartWattData(3, parseInt(data[item].NWATT));
+          this.setLineChartVarData(0, parseInt(data[item].AVAR));
+          this.setLineChartVarData(1, parseInt(data[item].BVAR));
+          this.setLineChartVarData(2, parseInt(data[item].CVAR));
+          this.setLineChartVarData(3, parseInt(data[item].NVAR));
+          this.setLineChartVaData(0, parseInt(data[item].AVA));
+          this.setLineChartVaData(1, parseInt(data[item].BVA));
+          this.setLineChartVaData(2, parseInt(data[item].CVA));
+          this.setLineChartVaData(3, parseInt(data[item].NVA));
+          this.setLineChartThdiData(0, parseInt(data[item].AVTHD));
+          this.setLineChartThdiData(1, parseInt(data[item].BVTHD));
+          this.setLineChartThdiData(2, parseInt(data[item].CVTHD));
+          this.setLineChartThdiData(3, parseInt(data[item].NVTHD));
+          this.setLineChartThdiData(0, parseInt(data[item].AITHD));
+          this.setLineChartThdiData(1, parseInt(data[item].BITHD));
+          this.setLineChartThdiData(2, parseInt(data[item].CITHD));
+          this.setLineChartThdiData(3, parseInt(data[item].NITHD));
+          this.setLineChartThdvData(0, parseInt(data[item].AITHD));
+          this.setLineChartThdvData(1, parseInt(data[item].BITHD));
+          this.setLineChartThdvData(2, parseInt(data[item].CITHD));
+          this.setLineChartThdvData(3, parseInt(data[item].NITHD));
+          this.setLineChartThdvData(0, parseInt(data[item].AVTHD));
+          this.setLineChartThdvData(1, parseInt(data[item].BVTHD));
+          this.setLineChartThdvData(2, parseInt(data[item].CVTHD));
+          this.setLineChartThdvData(3, parseInt(data[item].NVTHD));
+        }
+      }
     })
   }
 
   setChartData(position, value)
   {
-    console.log('data length ', this.lineChartData[position].data.length);
-    console.log('dataLabel length ', this.lineChartLabels.length);
-    console.log('data ', this.lineChartData[position].data);
+    // console.log('data length ', this.lineChartData[position].data.length);
+    // console.log('dataLabel length ', this.lineChartLabels.length);
+    // console.log('data ', this.lineChartData[position].data);
     if (this.lineChartData[position].data.length == this.lineChartLabels.length - 1) {
-      console.log('new data ', this.lineChartData[position].data);
+      // console.log('new data ', this.lineChartData[position].data);
       this.lineChartData[position].data[this.lineChartLabels.length - 1] = value
-      console.log('new data NEW', this.lineChartData[position].data);
+      // console.log('new data NEW', this.lineChartData[position].data);
       let dataArray = [];
       for(let i = 1; i < this.lineChartLabels.length; i++) {
         dataArray.push(this.lineChartData[position].data[i]);
       }
-      console.log('temporal data ', dataArray);
+      // console.log('temporal data ', dataArray);
       // @ts-ignore
-      console.log('old data ', this.lineChartData[position].data);
+      // console.log('old data ', this.lineChartData[position].data);
       this.lineChartData[position].data = dataArray;
-      console.log('NEW data ', this.lineChartData[position].data);
+      // console.log('NEW data ', this.lineChartData[position].data);
     } else {
       this.lineChartData[position].data.push(value)
     }
