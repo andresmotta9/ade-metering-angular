@@ -124,21 +124,13 @@ export class GraphComponent implements OnInit, OnDestroy {
     this.http.get('https://json-ade-metering.herokuapp.com/db')
     .subscribe((data: any) => {
       this.setChartData(0, parseInt(data.registers.VAWV));
-      // this.setChartData(1, parseInt(data.registers.VBWV));
-      // this.setChartData(2, parseInt(data.registers.VCWV));
-      // this.setChartData(3, parseInt(data.registers.VNWV));
-      this.setChartData(0, (parseInt(data.registers.VAWV)+20000));
-      // this.setChartData(1, (parseInt(data.registers.VBWV)+4000));
-      // this.setChartData(2, (parseInt(data.registers.VCWV)+6000));
-      // this.setChartData(3, (parseInt(data.registers.VNWV)+5000));
+      this.setChartData(1, parseInt(data.registers.VBWV));
+      this.setChartData(2, parseInt(data.registers.VCWV));
+      this.setChartData(3, parseInt(data.registers.VNWV));
       this.setChartCurrentData(0, parseInt(data.registers.IAWV));
       this.setChartCurrentData(1, parseInt(data.registers.IBWV));
       this.setChartCurrentData(2, parseInt(data.registers.ICWV));
       this.setChartCurrentData(3, parseInt(data.registers.INWV));
-      this.setChartCurrentData(0, (parseInt(data.registers.IAWV)+2000));
-      this.setChartCurrentData(1, (parseInt(data.registers.IBWV)+4000));
-      this.setChartCurrentData(2, (parseInt(data.registers.ICWV)+6000));
-      this.setChartCurrentData(3, (parseInt(data.registers.INWV)+5000));
       this.setLineChartWattData(0, parseInt(data.registers.AWATT));
       this.setLineChartWattData(1, parseInt(data.registers.BWATT));
       this.setLineChartWattData(2, parseInt(data.registers.CWATT));
