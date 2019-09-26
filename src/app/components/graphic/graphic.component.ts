@@ -11,7 +11,10 @@ import { HttpClient } from '@angular/common/http';
 export class GraphicComponent implements OnInit {
 
   @Input() lineChartData: ChartDataSets[]  = [
-    { data: [0], label: 'Línea A' }
+    { data: [0], label: 'Línea A' },
+    { data: [0], label: 'Línea B' },
+    { data: [0], label: 'Línea C' },
+    { data: [0], label: 'Línea D' }
   ];
   @Input() name: string = "";
 
