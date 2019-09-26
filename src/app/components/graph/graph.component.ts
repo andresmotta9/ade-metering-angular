@@ -110,13 +110,13 @@ export class GraphComponent implements OnInit, OnDestroy {
   ngOnInit() {
     setInterval(() => {
       this.getData(); 
-    }, 1000);
-    // setInterval(() => {
-    //   this.getData(); 
-    // }, 50);
-    // setInterval(() => {
-    //   this.getData(); 
-    // }, 50);
+    }, 50);
+    setInterval(() => {
+      this.getData(); 
+    }, 50);
+    setInterval(() => {
+      this.getData(); 
+    }, 50);
   }
 
   ngOnDestroy() {
