@@ -1,38 +1,57 @@
 <div>
     <div class="row top">
-        <div class="col-md-3">
-            <app-graphic [lineChartData]="lineChartData" ></app-graphic>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartData" name="Gráfica de voltaje (V)"></app-graphic>
         </div>
-        <div class="col-md-3">
-            <app-graphic [lineChartData]="lineChartCurrentData" ></app-graphic>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <table class="table  table-striped">
+                <tr>
+                    <th *ngFor="let label of lineChartLabels">{{label}}</th>
+                </tr>
+                <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
+                    <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+                </tr>
+            </table>
         </div>
-        <div class="col-md-3">
-            <app-graphic [lineChartData]="lineChartThdiData" ></app-graphic>
-        </div>
-        <div class="col-md-3">
-            <app-graphic [lineChartData]="lineChartThdvData" ></app-graphic>
-        </div>
-        <!-- <div class="col-md-6" style="margin-bottom: 10px">
-      <table class="table table-responsive table-condensed">
-        <tr>
-          <th *ngFor="let label of lineChartLabels">{{label}}</th>
-        </tr>
-        <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
-          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-        </tr>
-      </table>
-      <button mat-button mat-raised-button color="primary" (click)="randomize()">Randomize</button>
-    </div> -->
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <app-graphic [lineChartData]="lineChartWattData" ></app-graphic>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartThdvData" name="Gráfica de distorsión armónica en voltaje (Thdv)"></app-graphic>
         </div>
-        <div class="col-md-4">
-            <app-graphic [lineChartData]="lineChartVarData" ></app-graphic>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartCurrentData" name="Gráfica de corriente (A)"></app-graphic>
         </div>
-        <div class="col-md-4">
-            <app-graphic [lineChartData]="lineChartVaData" ></app-graphic>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartThdiData" name="Gráfica de distorsión armónica en corriente (Thdi)"></app-graphic>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartWattData" name="Gráfica potencia"></app-graphic>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartVarData" name="Gráfica potencia"></app-graphic>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            <app-graphic [lineChartData]="lineChartVaData" name="Gráfica potencia"></app-graphic>
         </div>
     </div>
 </div>
+<!-- <div class="col-md-6" style="margin-bottom: 10px">
+<table class="table table-responsive table-condensed">
+<tr>
+<th *ngFor="let label of lineChartLabels">{{label}}</th>
+</tr>
+<tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
+<td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+</tr>
+</table>
+<button mat-button mat-raised-button color="primary" (click)="randomize()">Randomize</button> -->

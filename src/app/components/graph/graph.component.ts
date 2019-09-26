@@ -6,6 +6,8 @@ import { Metering } from 'src/app/models/Metering.js';
 import { Observable, Subscription } from 'rxjs';
 import { RegisterService } from 'src/app/services/register.service.js';
 import { HttpClient } from '../../../../node_modules/@angular/common/http';
+import { ChartOptions } from 'chart.js';
+import { Color, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-graph',
@@ -121,7 +123,7 @@ export class GraphComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.http.get('https://json-ade-metering.herokuapp.com/db')
+    this.http.get('https://json-ade-metering.herokuapp.com/registers/1')
     .subscribe((data: any) => {
       this.setChartData(0, parseInt(data.registers.VAWV));
       this.setChartData(1, parseInt(data.registers.VBWV));
